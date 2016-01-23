@@ -18,7 +18,7 @@ namespace Jira.NET
                 throw new ArgumentNullException(nameof(serverUrl));
             Uri result;
             if (!Uri.TryCreate(serverUrl, UriKind.Absolute, out result))
-                throw new FormatException("The server url provided is not a valid URI.");
+                throw new FormatException("The server url provided is not a valid URI, and has to be absolute.");
             ServerUrl = result;
         }
 
@@ -26,7 +26,8 @@ namespace Jira.NET
         {
             if (serverUrl == null)
                 throw new ArgumentNullException(nameof(serverUrl));
-
+            if(!serverUrl.IsAbsoluteUri)
+                throw new FormatException("The provided server url has to be absolute.");
             ServerUrl = serverUrl;
         }
     }
