@@ -44,12 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JiraBasicRestClient.cs" />
+    <Compile Include="JiraCookieRestClient.cs" />
     <Compile Include="JiraRestClient.cs" />
+    <Compile Include="Models\JiraApplicationRole.cs" />
+    <Compile Include="Models\JiraApplicationRoles.cs" />
+    <Compile Include="Models\JiraAvatarUrls.cs" />
+    <Compile Include="Models\JiraExpandedObject.cs" />
+    <Compile Include="Models\JiraObject.cs" />
+    <Compile Include="Models\JiraUser.cs" />
+    <Compile Include="Models\JiraUserAuthentication.cs" />
+    <Compile Include="Models\JiraUserGroup.cs" />
+    <Compile Include="Models\JiraUserGroups.cs" />
+    <Compile Include="Models\JiraUserLogin.cs" />
+    <Compile Include="Models\JiraUserLoginInfo.cs" />
+    <Compile Include="Models\JiraUsers.cs" />
+    <Compile Include="Models\JiraUserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CookieBasedAuthenticator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
