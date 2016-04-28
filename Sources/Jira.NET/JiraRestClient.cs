@@ -1,29 +1,22 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using Jira.NET.Models;
 using RestSharp;
-using RestSharp.Serializers;
 
 namespace Jira.NET
 {
-    public class JiraRestClient
+    public abstract class JiraRestClient
     {
         private string ApiUrl = "rest/api/latest/";
         public Uri ServerUrl { get; }
         public Uri BaseUrl => new Uri(ServerUrl, ApiUrl);
 
-        public virtual bool IsAuthenticated
-        {
-            get
-            {
-                IRestResponse restResponse = Execute("myself");
-                return restResponse != null && restResponse.StatusCode == HttpStatusCode.OK && restResponse.ResponseStatus == ResponseStatus.Completed;
-            }
-        }
+        public abstract bool IsAuthenticated { get; }
 
         protected IRestClient RestClient;
 
-        public JiraRestClient(string serverUrl)
+        protected JiraRestClient(string serverUrl)
         {
             if (string.IsNullOrWhiteSpace(serverUrl))
                 throw new ArgumentNullException(nameof(serverUrl));
@@ -34,7 +27,7 @@ namespace Jira.NET
             InitializeClient();
         }
 
-        public JiraRestClient(Uri serverUrl)
+        protected JiraRestClient(Uri serverUrl)
         {
             if (serverUrl == null)
                 throw new ArgumentNullException(nameof(serverUrl));
@@ -49,13 +42,19 @@ namespace Jira.NET
             RestClient = new RestClient(BaseUrl);
         }
 
-        protected IRestResponse Execute(string request)
+        protected IRestResponse Execute(string request, Method method = Method.GET)
         {
             if (string.IsNullOrWhiteSpace(request))
                 throw new ArgumentNullException(nameof(request));
 
             IRestRequest restRequest = new RestRequest(request);
-            return RestClient.Execute(restRequest);
+            IRestResponse response = RestClient.Execute(restRequest);
+            if (response.ResponseStatus != ResponseStatus.Completed)
+                if (response.ErrorException != null && !string.IsNullOrWhiteSpace(response.ErrorMessage))
+                    throw new HttpRequestException(response.ErrorMessage, response.ErrorException);
+                else
+                    throw new HttpRequestException("The request failed with the following response status '" + response.ResponseStatus + "' and status code '" + response.StatusCode + "'.");
+            return response;
         }
 
         protected IRestResponse<T> Execute<T>(string request, Method method = Method.GET) where T : new()
@@ -67,9 +66,9 @@ namespace Jira.NET
             IRestResponse<T> response = RestClient.Execute<T>(restRequest);
             if (response.ResponseStatus != ResponseStatus.Completed)
                 if (response.ErrorException != null && !string.IsNullOrWhiteSpace(response.ErrorMessage))
-                    throw new Exception(response.ErrorMessage, response.ErrorException);
+                    throw new HttpRequestException(response.ErrorMessage, response.ErrorException);
                 else
-                    throw new Exception("The request failed for unknown reason.");
+                    throw new HttpRequestException("The request failed with the following response status '" + response.ResponseStatus + "' and status code '" + response.StatusCode + "'.");
             return response;
         }
 

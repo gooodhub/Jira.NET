@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mock\JiraTestRestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="JiraRestClientTests.cs" />
     <Compile Include="JiraBasicRestClientTests.cs" />

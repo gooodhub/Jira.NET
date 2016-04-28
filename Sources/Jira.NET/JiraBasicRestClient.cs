@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -24,6 +25,15 @@ namespace Jira.NET
         public JiraBasicRestClient(Uri serverUrl, string login, string password) : base(serverUrl)
         {
             InitializeClient(login, password);
+        }
+
+        public override bool IsAuthenticated
+        {
+            get
+            {
+                IRestResponse restResponse = Execute("myself");
+                return restResponse != null && restResponse.StatusCode != HttpStatusCode.Unauthorized;
+            }
         }
     }
 }

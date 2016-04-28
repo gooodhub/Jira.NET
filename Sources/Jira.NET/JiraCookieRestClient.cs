@@ -57,5 +57,13 @@ namespace Jira.NET
             IRestRequest request = new RestRequest("session", Method.DELETE);
             IRestResponse response = _restAuthClient.Execute(request);
         }
+
+        public override bool IsAuthenticated
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
