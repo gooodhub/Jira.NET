@@ -31,5 +31,13 @@ namespace Jira.NET.Tests
             Assert.IsNotNull(currentUser.Groups.Items);
             Assert.IsNotNull(currentUser.ApplicationRoles.Items);
         }
+
+        [TestMethod]
+        public void Jira_Get_Issue_By_Key()
+        {
+            JiraBasicRestClient client = new JiraBasicRestClient(JiraTestUrl, JiraTestUser, JiraTestPassword);
+            JiraWardIssue issue = client.GetIssue("TEST-1");
+            Assert.IsNotNull(issue);
+        }
     }
 }

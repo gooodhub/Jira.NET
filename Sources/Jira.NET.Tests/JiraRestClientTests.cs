@@ -66,11 +66,5 @@ namespace Jira.NET.Tests
             // final Url used server Url base (without subfolder/virtual dir) combined with jira rest api path => subfolder/virtual dir are truncated
             Assert.AreEqual(new Uri("http://www.jira.com:8080/rest/api/latest/"), client.BaseUrl);
         }
-
-        [TestMethod]
-        public void Get_Data_On_Issue()
-        {
-            
-        }
     }
 }

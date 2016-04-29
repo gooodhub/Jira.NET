@@ -77,5 +77,11 @@ namespace Jira.NET
             IRestResponse<JiraUser> response = Execute<JiraUser>("myself");
             return response.Data;
         }
+
+        public JiraWardIssue GetIssue(string key)
+        {
+            IRestResponse<JiraWardIssue> response = Execute<JiraWardIssue>("issue/" + key);
+            return response.Data;
+        }
     }
 }

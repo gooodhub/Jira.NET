@@ -2,16 +2,13 @@
 
 namespace Jira.NET.Models
 {
-    public class JiraAuthor
+    public class JiraWatcher
     {
         [DeserializeAs(Name = "self")]
         public string Self { get; set; }
 
         [DeserializeAs(Name = "name")]
         public string Name { get; set; }
-
-        [DeserializeAs(Name = "avatarUrls")]
-        public JiraAvatarUrls AvatarUrls { get; set; }
 
         [DeserializeAs(Name = "displayName")]
         public string DisplayName { get; set; }
