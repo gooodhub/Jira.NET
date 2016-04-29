@@ -49,9 +49,17 @@
     <Compile Include="JiraRestClient.cs" />
     <Compile Include="Models\JiraApplicationRole.cs" />
     <Compile Include="Models\JiraApplicationRoles.cs" />
+    <Compile Include="Models\JiraAuthor.cs" />
     <Compile Include="Models\JiraAvatarUrls.cs" />
     <Compile Include="Models\JiraExpandedObject.cs" />
+    <Compile Include="Models\JiraIssue.cs" />
+    <Compile Include="Models\JiraFields.cs" />
+    <Compile Include="Models\JiraIssueLink.cs" />
     <Compile Include="Models\JiraObject.cs" />
+    <Compile Include="Models\JiraProject.cs" />
+    <Compile Include="Models\JiraProjectCategory.cs" />
+    <Compile Include="Models\JiraSchema.cs" />
+    <Compile Include="Models\JiraTimeTracking.cs" />
     <Compile Include="Models\JiraUser.cs" />
     <Compile Include="Models\JiraUserAuthentication.cs" />
     <Compile Include="Models\JiraUserGroup.cs" />
@@ -60,6 +68,9 @@
     <Compile Include="Models\JiraUserLoginInfo.cs" />
     <Compile Include="Models\JiraUsers.cs" />
     <Compile Include="Models\JiraUserSession.cs" />
+    <Compile Include="Models\JiraVisibility.cs" />
+    <Compile Include="Models\JiraWardIssue.cs" />
+    <Compile Include="Models\JiraWorklog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CookieBasedAuthenticator.cs" />
   </ItemGroup>
